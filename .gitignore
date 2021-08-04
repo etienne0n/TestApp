@@ -6,6 +6,10 @@ gradle.properties
 gradlew
 gradlew.bat
 settings.gradle
+/app/build.gradle
+
+*gradle*
+
 # Created by https://www.toptal.com/developers/gitignore/api/android,gradle,intellij,androidstudio,eclipse,java,kotlin,maven
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,gradle,intellij,androidstudio,eclipse,java,kotlin,maven
 
