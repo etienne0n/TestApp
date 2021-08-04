@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestApp</string>
+    <string name="app_name">Tic Tac Toe</string>
     <string name="spielerX">Spieler X ist an der Reihe</string>
     <string name="spielerY">Spieler Y ist an der Reihe</string>
     <string name="x">X</string>
