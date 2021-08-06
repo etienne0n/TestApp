@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean currentPlayer = false; // false -> Player X, true -> Player O
     private TextView[][] idArray = new TextView[3][3];
 
+    private static int gameCounter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         TextView statusText = findViewById(R.id.statusText);
         TextView playerXWins = findViewById(R.id.playerXWins);
         TextView playerOWins = findViewById(R.id.playerOWins);
+
+
 
         initArray();
 
@@ -35,19 +39,27 @@ public class MainActivity extends AppCompatActivity {
                 current.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        current.setText(currentPlayer());
-                        if(won(currentPlayer())){
-                            clearField();
-                            xAndOWins[currentPlayer ? 1 : 0]++;
-                            playerXWins.setText("Player X : " + xAndOWins[0]);
-                            playerOWins.setText("Player O : " + xAndOWins[1]);
-                            //statusText.setText("Spieler " + currentPlayer() + " ist an der Reihe!");
-                            //currentPlayer = false;
-                        }else{
-                            nextPlayer();
-                        }
-                        statusText.setText("Spieler " + currentPlayer() + " ist an der Reihe!");
 
+                        if(current.getText().equals("")){
+                            gameCounter++;
+                            current.setText(currentPlayer());
+                            if(won(currentPlayer())){
+                                clearField();
+                                xAndOWins[currentPlayer ? 1 : 0]++;
+                                playerXWins.setText("Player X : " + xAndOWins[0]);
+                                playerOWins.setText("Player O : " + xAndOWins[1]);
+                                statusText.setText("Spieler " + currentPlayer() + " ist an der Reihe!");
+                                //currentPlayer = false;
+                            }else if(gameCounter == 9){
+                                clearField();
+                                nextPlayer();
+                                statusText.setText("Unentschieden. Spieler " + currentPlayer() + " ist an der Reihe!");
+                            } else{
+                                nextPlayer();
+                                statusText.setText("Spieler " + currentPlayer() + " ist an der Reihe!");
+                            }
+
+                        }
                     }
                 });
             }
@@ -59,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         for(int y = 0; y < 3; y++){
             for(int x = 0; x < 3; x++){
                 idArray[y][x].setText("");
+                gameCounter = 0;
             }
         }
     }
